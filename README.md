@@ -1,3 +1,62 @@
+# Metazapp Excalidraw
+
+> Metazapp Solutions' customised build of [Excalidraw](https://github.com/excalidraw/excalidraw) (MIT licensed — see [`LICENSE`](./LICENSE) and [`NOTICE.md`](./NOTICE.md)). This is a standalone repository; it is **not** synced automatically with upstream Excalidraw.
+
+**Metazapp additions**
+
+- **Export to PDF** (☰ menu → _Export to PDF…_) — exports the used canvas area with automatic page setup: best orientation, single page when readable, otherwise the fewest pages with blank pages skipped. Paper size, margins, DPI, background, dark mode and page numbers are configurable.
+- Metazapp branding (title, PWA name, package names).
+
+## Install on a new system
+
+**Requirements:** [Node.js](https://nodejs.org/) 22, [Git](https://git-scm.com/), Yarn 1 (`corepack enable` once after installing Node).
+
+```bash
+git clone https://github.com/metazapp/metazapp-excalidraw.git
+cd metazapp-excalidraw
+yarn install
+yarn start          # opens http://localhost:3000
+```
+
+- **Private repo?** Run `gh auth login` (as `metazapp`) before cloning.
+- **`NODE_ENV=production` set on the machine?** Yarn will then skip dev tools (Vite etc.). Switch it for the session first:
+  - Windows (cmd): `set NODE_ENV=development`
+  - PowerShell: `$env:NODE_ENV="development"`
+  - macOS/Linux: `export NODE_ENV=development`
+
+### Production build
+
+```bash
+yarn build          # static site in excalidraw-app/build/
+```
+
+Host the `excalidraw-app/build/` folder on any static host (Nginx, VPS, Vercel, Netlify, Cloudflare Pages) — no Node needed on the server.
+
+## Pulling updates from upstream Excalidraw
+
+Upstream changes are **not** applied automatically. To bring them in manually:
+
+```bash
+# one-time setup (per clone)
+git remote add upstream https://github.com/excalidraw/excalidraw.git
+git remote set-url --push upstream DISABLED   # never push to upstream
+
+# each time you want to update
+git checkout master
+git fetch upstream
+git merge upstream/master
+node scripts/metazapp-rebrand.cjs             # re-apply Metazapp branding
+yarn install                                  # pick up new dependencies
+yarn start                                    # test before pushing
+git push origin master
+```
+
+Our features live mostly in separate files (`excalidraw-app/pdf/`, `excalidraw-app/components/PdfExportDialog.*`), so conflicts are rare. If any occur, they're most likely in `excalidraw-app/App.tsx`, `excalidraw-app/components/AppMainMenu.tsx` or `excalidraw-app/vite.config.mts`.
+
+---
+
+_Original Excalidraw README follows._
+
 <a href="https://excalidraw.com/" target="_blank" rel="noopener">
   <picture>
     <source media="(prefers-color-scheme: dark)" alt="Excalidraw" srcset="https://excalidraw.nyc3.cdn.digitaloceanspaces.com/github/excalidraw_github_cover_2_dark.png" />
