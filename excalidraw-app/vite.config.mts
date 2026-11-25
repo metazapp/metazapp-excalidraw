@@ -153,6 +153,11 @@ export default defineConfig(({ mode }) => {
     // We need to specify the envDir since now there are no
     //more located in parallel with the vite.config.ts file but in parent dir
     envDir: "../",
+    // Metazapp: pre-bundle lazily imported deps so the dev server doesn't
+    // 504 ("Outdated Optimize Dep") on their first dynamic import
+    optimizeDeps: {
+      include: ["jspdf"],
+    },
     resolve: {
       alias: [
         {
@@ -407,10 +412,10 @@ export default defineConfig(({ mode }) => {
           maximumFileSizeToCacheInBytes: 2.3 * 1024 ** 2, // 2.3MB
         },
         manifest: {
-          short_name: "Excalidraw",
-          name: "Excalidraw",
+          short_name: "MZ Excalidraw",
+          name: "Metazapp Excalidraw",
           description:
-            "Excalidraw is a whiteboard tool that lets you easily sketch diagrams that have a hand-drawn feel to them.",
+            "Metazapp Excalidraw (based on Excalidraw) is a whiteboard tool that lets you easily sketch diagrams that have a hand-drawn feel to them.",
           icons: [
             {
               src: "android-chrome-192x192.png",
