@@ -1,0 +1,140 @@
+.excalidraw {
+  .PdfExport {
+    &__empty {
+      padding: 2rem 0;
+      text-align: center;
+      color: var(--color-gray-60);
+    }
+
+    &__body {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    &__previewCol {
+      flex: 1 1 340px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    &__preview {
+      position: relative;
+      display: inline-block;
+      min-width: 120px;
+      min-height: 120px;
+      padding: 12px;
+      border-radius: var(--border-radius-lg, 8px);
+      background: repeating-conic-gradient(
+          var(--color-gray-10, #f1f3f5) 0% 25%,
+          transparent 0% 50%
+        )
+        50% / 16px 16px;
+      box-shadow: inset 0 0 0 1px var(--default-border-color, #ddd);
+
+      & > div {
+        line-height: 0;
+      }
+    }
+
+    &__previewCanvas {
+      display: block;
+    }
+
+    &__overlay {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      pointer-events: none;
+
+      rect {
+        fill: none;
+        stroke: var(--color-primary, #6965db);
+        stroke-width: 1.5;
+      }
+
+      text {
+        font-size: 11px;
+        font-weight: 600;
+        fill: var(--color-primary, #6965db);
+      }
+
+      .is-skipped rect {
+        stroke-dasharray: 4 3;
+        stroke-opacity: 0.35;
+        fill: rgba(128, 128, 128, 0.08);
+      }
+    }
+
+    &__summary {
+      font-size: 0.875rem;
+      color: var(--text-primary-color);
+      text-align: center;
+    }
+
+    &__settings {
+      flex: 1 1 260px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+
+      > label {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+        font-size: 0.8125rem;
+
+        > span {
+          font-weight: 600;
+          color: var(--text-primary-color);
+        }
+      }
+
+      select,
+      input[type="number"] {
+        height: 2rem;
+        padding: 0 0.5rem;
+        border-radius: var(--border-radius-md, 6px);
+        border: 1px solid var(--default-border-color, #ccc);
+        background: var(--input-bg-color, transparent);
+        color: var(--text-primary-color);
+        font-size: 0.8125rem;
+      }
+    }
+
+    &__scale {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      input[type="range"] {
+        flex: 1;
+      }
+
+      input[type="number"] {
+        width: 4.5rem;
+      }
+    }
+
+    &__checks {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.4rem 0.75rem;
+      font-size: 0.8125rem;
+
+      label {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        cursor: pointer;
+      }
+    }
+
+    &__error {
+      color: var(--color-danger, #e03131);
+      font-size: 0.8125rem;
+    }
+  }
+}

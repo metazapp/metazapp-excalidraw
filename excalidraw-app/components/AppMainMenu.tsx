@@ -2,6 +2,7 @@ import {
   loginIcon,
   ExcalLogo,
   eyeIcon,
+  exportToFileIcon,
 } from "@excalidraw/excalidraw/components/icons";
 import { useI18n } from "@excalidraw/excalidraw/i18n";
 import { MainMenu } from "@excalidraw/excalidraw/index";
@@ -22,6 +23,7 @@ export const AppMainMenu: React.FC<{
   isCollabEnabled: boolean;
   theme: Theme | "system";
   refresh: () => void;
+  onPdfExportOpen: () => void;
 }> = React.memo((props) => {
   const { t } = useI18n();
   return (
@@ -30,6 +32,13 @@ export const AppMainMenu: React.FC<{
       <MainMenu.DefaultItems.SaveToActiveFile />
       <MainMenu.DefaultItems.Export />
       <MainMenu.DefaultItems.SaveAsImage />
+      <MainMenu.Item
+        icon={exportToFileIcon}
+        onSelect={() => props.onPdfExportOpen()}
+        data-testid="pdf-export-button"
+      >
+        Export to PDF…
+      </MainMenu.Item>
       {props.isCollabEnabled && (
         <MainMenu.DefaultItems.LiveCollaborationTrigger
           isCollaborating={props.isCollaborating}

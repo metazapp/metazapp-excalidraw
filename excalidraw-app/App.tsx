@@ -102,6 +102,7 @@ import Collab, {
 } from "./collab/Collab";
 import { AppFooter } from "./components/AppFooter";
 import { AppMainMenu } from "./components/AppMainMenu";
+import { PdfExportDialog } from "./components/PdfExportDialog";
 import { AppWelcomeScreen } from "./components/AppWelcomeScreen";
 import {
   ExportToExcalidrawPlus,
@@ -452,6 +453,7 @@ const ExcalidrawWrapper = () => {
   });
 
   const [, forceRefresh] = useState(false);
+  const [pdfExportOpen, setPdfExportOpen] = useState(false);
 
   useEffect(() => {
     if (isDevEnv()) {
@@ -1049,7 +1051,14 @@ const ExcalidrawWrapper = () => {
           isCollabEnabled={isCollabAvailable}
           theme={appTheme}
           refresh={() => forceRefresh((prev) => !prev)}
+          onPdfExportOpen={() => setPdfExportOpen(true)}
         />
+        {excalidrawAPI && pdfExportOpen && (
+          <PdfExportDialog
+            excalidrawAPI={excalidrawAPI}
+            onClose={() => setPdfExportOpen(false)}
+          />
+        )}
         <AppWelcomeScreen
           onCollabDialogOpen={onCollabDialogOpen}
           isCollabEnabled={isCollabAvailable}

@@ -1,5 +1,5 @@
 {
-  "name": "excalidraw-app",
+  "name": "metazapp-excalidraw-app",
   "version": "1.0.0",
   "private": true,
   "homepage": ".",
@@ -33,6 +33,7 @@
     "i18next-browser-languagedetector": "6.1.4",
     "idb-keyval": "6.0.3",
     "jotai": "2.11.0",
+    "jspdf": "^3",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "socket.io-client": "4.7.2",
