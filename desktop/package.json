@@ -1,0 +1,76 @@
+{
+  "name": "metazapp-excalidraw-desktop",
+  "productName": "Metazapp Excalidraw",
+  "version": "1.0.0",
+  "description": "Metazapp Excalidraw desktop app (Windows installer)",
+  "author": "Metazapp Solutions Pvt Ltd",
+  "license": "MIT",
+  "private": true,
+  "main": "main.cjs",
+  "scripts": {
+    "icons": "node scripts/generate-icons.mjs",
+    "build:web": "cd ../excalidraw-app && yarn build:app:docker && yarn build:version",
+    "start": "electron .",
+    "dist": "electron-builder --win nsis --x64 --publish never",
+    "release": "npm run icons && npm run build:web && npm run dist"
+  },
+  "devDependencies": {
+    "electron": "^39.0.0",
+    "electron-builder": "^26.0.0",
+    "png-to-ico": "^2.1.8",
+    "sharp": "^0.34.0"
+  },
+  "build": {
+    "appId": "com.metazapp.excalidraw",
+    "productName": "Metazapp Excalidraw",
+    "copyright": "Copyright © Metazapp Solutions Pvt Ltd. Based on Excalidraw (MIT).",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "main.cjs",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "../excalidraw-app/build",
+        "to": "web"
+      }
+    ],
+    "extraFiles": [
+      {
+        "from": "../LICENSE",
+        "to": "LICENSE.txt"
+      },
+      {
+        "from": "../NOTICE.md",
+        "to": "NOTICE.md"
+      }
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "build/icon.ico",
+      "artifactName": "Metazapp-Excalidraw-Setup-${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Metazapp Excalidraw",
+      "installerIcon": "build/icon.ico",
+      "uninstallerIcon": "build/icon.ico",
+      "license": "../LICENSE"
+    },
+    "fileAssociations": [
+      {
+        "ext": "excalidraw",
+        "name": "Excalidraw drawing",
+        "description": "Excalidraw drawing",
+        "icon": "build/icon.ico"
+      }
+    ]
+  }
+}

@@ -32,6 +32,23 @@ yarn build          # static site in excalidraw-app/build/
 
 Host the `excalidraw-app/build/` folder on any static host (Nginx, VPS, Vercel, Netlify, Cloudflare Pages) — no Node needed on the server.
 
+## Windows desktop app
+
+**Download:** grab `Metazapp-Excalidraw-Setup-<version>.exe` from [Releases](https://github.com/metazapp/metazapp-excalidraw/releases) and run it. The installer isn't code-signed yet, so Windows SmartScreen may warn — click _More info → Run anyway_.
+
+**Build the installer yourself** (Windows, from the repo root):
+
+```bash
+cd desktop
+npm install
+npm run release     # icons → production web build → desktop/dist/Metazapp-Excalidraw-Setup-<version>.exe
+```
+
+- `npm run icons` regenerates every favicon/PWA/Windows icon from `branding/logo.svg`.
+- `npm start` runs the desktop shell against the existing `excalidraw-app/build/` (no installer).
+- Bump `version` in `desktop/package.json` before building a new release.
+- The desktop build disables Sentry error reporting; tracking is off.
+
 ## Pulling updates from upstream Excalidraw
 
 Upstream changes are **not** applied automatically. To bring them in manually:
